@@ -130,6 +130,12 @@
 
 .field private mNeedInitialFocus:Z
 
+.field private mNightReadMode:Z
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->NEW_FIELD:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
+.end field
+
 .field private mOverrideCacheMode:I
 
 .field private mPageCacheCapacity:I
@@ -225,6 +231,8 @@
     iput-object v1, p0, Landroid/webkit/WebSettingsClassic;->mLayoutAlgorithm:Landroid/webkit/WebSettings$LayoutAlgorithm;
 
     iput v6, p0, Landroid/webkit/WebSettingsClassic;->mTextSize:I
+
+    iput-boolean v3, p0, Landroid/webkit/WebSettingsClassic;->mNightReadMode:Z
 
     const-string v1, "sans-serif"
 
@@ -2048,6 +2056,32 @@
     iget-boolean v0, p0, Landroid/webkit/WebSettingsClassic;->mNeedInitialFocus:Z
 
     return v0
+.end method
+
+.method public declared-synchronized getNightReadModeEnabled()Z
+    .locals 1
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->NEW_METHOD:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
+
+    .prologue
+    monitor-enter p0
+
+    :try_start_0
+    iget-boolean v0, p0, Landroid/webkit/WebSettingsClassic;->mNightReadMode:Z
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit p0
+
+    return v0
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
 .end method
 
 .method public declared-synchronized getPluginState()Landroid/webkit/WebSettings$PluginState;
@@ -5273,4 +5307,33 @@
     monitor-exit p0
 
     throw v1
+.end method
+
+.method public declared-synchronized setNightReadModeEnabled(Z)V
+    .locals 1
+    .parameter "enable"
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->NEW_METHOD:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
+
+    .prologue
+    monitor-enter p0
+
+    :try_start_0
+    iput-boolean p1, p0, Landroid/webkit/WebSettingsClassic;->mNightReadMode:Z
+
+    invoke-direct {p0}, Landroid/webkit/WebSettingsClassic;->postSync()V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit p0
+
+    return-void
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
 .end method
