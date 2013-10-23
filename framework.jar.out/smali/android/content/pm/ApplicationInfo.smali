@@ -1109,7 +1109,7 @@
 
     move-result-object v0
 
-    const-string/jumbo v1, "sharedLibraryFiles="
+    const-string v1, "sharedLibraryFiles="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1127,7 +1127,7 @@
 
     invoke-interface {p1, v0}, Landroid/util/Printer;->println(Ljava/lang/String;)V
 
-    .line 521
+    .line 517
     :cond_4
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -1167,12 +1167,10 @@
 
     invoke-interface {p1, v0}, Landroid/util/Printer;->println(Ljava/lang/String;)V
 
-    .line 522
     iget-object v0, p0, Landroid/content/pm/ApplicationInfo;->manageSpaceActivityName:Ljava/lang/String;
 
     if-eqz v0, :cond_5
 
-    .line 523
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1181,7 +1179,7 @@
 
     move-result-object v0
 
-    const-string/jumbo v1, "manageSpaceActivityName="
+    const-string v1, "manageSpaceActivityName="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1199,13 +1197,12 @@
 
     invoke-interface {p1, v0}, Landroid/util/Printer;->println(Ljava/lang/String;)V
 
-    .line 525
+    .line 521
     :cond_5
     iget v0, p0, Landroid/content/pm/ApplicationInfo;->descriptionRes:I
 
     if-eqz v0, :cond_6
 
-    .line 526
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1236,13 +1233,11 @@
 
     invoke-interface {p1, v0}, Landroid/util/Printer;->println(Ljava/lang/String;)V
 
-    .line 528
     :cond_6
     iget v0, p0, Landroid/content/pm/ApplicationInfo;->uiOptions:I
 
     if-eqz v0, :cond_7
 
-    .line 529
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1273,7 +1268,6 @@
 
     invoke-interface {p1, v0}, Landroid/util/Printer;->println(Ljava/lang/String;)V
 
-    .line 531
     :cond_7
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -1283,7 +1277,7 @@
 
     move-result-object v0
 
-    const-string/jumbo v1, "supportsRtl="
+    const-string v1, "supportsRtl="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -1295,7 +1289,7 @@
 
     if-eqz v0, :cond_9
 
-    const-string/jumbo v0, "true"
+    const-string v0, "true"
 
     :goto_1
     invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
@@ -1308,13 +1302,11 @@
 
     invoke-interface {p1, v0}, Landroid/util/Printer;->println(Ljava/lang/String;)V
 
-    .line 532
     invoke-super {p0, p1, p2}, Landroid/content/pm/PackageItemInfo;->dumpBack(Landroid/util/Printer;Ljava/lang/String;)V
 
-    .line 533
     return-void
 
-    .line 508
+    .line 531
     :cond_8
     iget-object v0, p0, Landroid/content/pm/ApplicationInfo;->sourceDir:Ljava/lang/String;
 
@@ -1355,7 +1347,6 @@
 
     goto/16 :goto_0
 
-    .line 531
     :cond_9
     const-string v0, "false"
 

@@ -38,18 +38,17 @@
     return-void
 .end method
 
-.method private constructor <init>(IIB)V
+.method private constructor <init>(II)V
     .locals 0
     .parameter "row"
     .parameter "column"
-    .parameter "size"
 
     .prologue
     .line 152
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     .line 153
-    invoke-static {p1, p2, p3}, Lcom/android/internal/widget/LockPatternView$Cell;->checkRange(IIB)V
+    invoke-static {p1, p2}, Lcom/android/internal/widget/LockPatternView$Cell;->checkRange(II)V
 
     .line 154
     iput p1, p0, Lcom/android/internal/widget/LockPatternView$Cell;->row:I
@@ -61,17 +60,15 @@
     return-void
 .end method
 
-.method private static checkRange(IIB)V
-    .locals 3
+.method private static checkRange(II)V
+    .locals 2
     .parameter "row"
     .parameter "column"
-    .parameter "size"
 
     .prologue
-    .line 185
-    if-ltz p0, :cond_0
+    const/4 v0, 0x2
 
-    add-int/lit8 v0, p2, -0x1
+    if-ltz p0, :cond_0
 
     if-le p0, v0, :cond_1
 
@@ -79,25 +76,7 @@
     :cond_0
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string/jumbo v2, "row must be in range 0-"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    add-int/lit8 v2, p2, -0x1
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
+    const-string v1, "row must be in range 0-2"
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
@@ -107,33 +86,13 @@
     :cond_1
     if-ltz p1, :cond_2
 
-    add-int/lit8 v0, p2, -0x1
-
     if-le p1, v0, :cond_3
 
     .line 189
     :cond_2
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
-    new-instance v1, Ljava/lang/StringBuilder;
-
-    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v2, "column must be in range 0-"
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    add-int/lit8 v2, p2, -0x1
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v1
+    const-string v1, "column must be in range 0-2"
 
     invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
@@ -144,11 +103,10 @@
     return-void
 .end method
 
-.method public static declared-synchronized of(IIB)Lcom/android/internal/widget/LockPatternView$Cell;
+.method public static declared-synchronized of(II)Lcom/android/internal/widget/LockPatternView$Cell;
     .locals 2
     .parameter "row"
     .parameter "column"
-    .parameter "size"
 
     .prologue
     .line 171
@@ -157,7 +115,7 @@
     monitor-enter v1
 
     :try_start_0
-    invoke-static {p0, p1, p2}, Lcom/android/internal/widget/LockPatternView$Cell;->checkRange(IIB)V
+    invoke-static {p0, p1}, Lcom/android/internal/widget/LockPatternView$Cell;->checkRange(II)V
 
     .line 172
     sget-object v0, Lcom/android/internal/widget/LockPatternView$Cell;->sCells:[[Lcom/android/internal/widget/LockPatternView$Cell;
@@ -222,7 +180,7 @@
 
     new-instance v3, Lcom/android/internal/widget/LockPatternView$Cell;
 
-    invoke-direct {v3, v0, v1, p0}, Lcom/android/internal/widget/LockPatternView$Cell;-><init>(IIB)V
+    invoke-direct {v3, v0, v1}, Lcom/android/internal/widget/LockPatternView$Cell;-><init>(II)V
 
     aput-object v3, v2, v1
 

@@ -513,9 +513,9 @@
 
     .line 329
     .local v1, filename:Ljava/lang/String;
-    const-string v2, "storage/emulated"
+    const-string v2, "sdcard"
 
-    const-string v3, "data/media"
+    const-string v3, "emmc"
 
     invoke-virtual {v1, v2, v3}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
 

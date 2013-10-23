@@ -180,26 +180,15 @@
     return-object v0
 .end method
 
-.method public makeNewWindowManager()Landroid/view/WindowManagerPolicy;
-    .locals 1
-
-    .prologue
-    new-instance v0, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;
-
-    invoke-direct {v0}, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;-><init>()V
-
-    return-object v0
-.end method
-
 .method public makeNewWindowManager(Lcom/android/internal/os/IDeviceHandler;)Landroid/view/WindowManagerPolicy;
     .locals 1
     .parameter "device"
 
     .prologue
     .line 72
-    new-instance v0, Lcom/android/internal/policy/impl/PhoneWindowManager;
+    new-instance v0, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;
 
-    invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;-><init>(Lcom/android/internal/os/IDeviceHandler;)V
+    invoke-direct {v0}, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;-><init>()V
 
     return-object v0
 .end method
