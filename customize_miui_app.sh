@@ -6,6 +6,7 @@
 
 XMLMERGYTOOL=$PORT_ROOT/tools/ResValuesModify/jar/ResValuesModify
 GIT_APPLY=$PORT_ROOT/tools/git.apply
+
 curdir=`pwd`
 
 function appendPart() {
@@ -28,7 +29,7 @@ if [ $1 = "Settings" ];then
 #	echo "Fatal error: Settings patch fail"
 #        exit 1
 #    done
-
+#
 	$XMLMERGYTOOL $1/res/values $2/res/values
     $XMLMERGYTOOL $1/res/values-hdpi $2/res/values-hdpi
 fi
