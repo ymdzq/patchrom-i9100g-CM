@@ -1387,35 +1387,28 @@
     .locals 4
 
     .prologue
-    .line 338
     invoke-static {}, Ldalvik/system/VMRuntime;->getRuntime()Ldalvik/system/VMRuntime;
 
     move-result-object v1
 
-    .line 340
     .local v1, runtime:Ldalvik/system/VMRuntime;
     invoke-static {}, Landroid/os/Debug;->startAllocCounting()V
 
-    .line 342
     :try_start_0
     invoke-static {}, Ljava/lang/System;->gc()V
 
-    .line 343
     invoke-virtual {v1}, Ldalvik/system/VMRuntime;->runFinalizationSync()V
 
-    .line 344
     invoke-static {}, Landroid/content/res/Resources;->getSystem()Landroid/content/res/Resources;
 
     move-result-object v2
 
     sput-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
 
-    .line 345
     sget-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
 
     invoke-virtual {v2}, Landroid/content/res/Resources;->startPreloading()V
 
-    .line 365
     const-string v2, "Zygote"
 
     const-string v3, "Preload resources disabled, skipped."
@@ -1424,7 +1417,6 @@
 
     invoke-static {}, Lcom/android/internal/os/ZygoteInit;->preloadMiuiResources()V
 
-    .line 367
     sget-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
 
     invoke-virtual {v2}, Landroid/content/res/Resources;->finishPreloading()V

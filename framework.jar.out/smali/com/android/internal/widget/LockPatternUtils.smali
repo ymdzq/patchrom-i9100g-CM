@@ -708,28 +708,22 @@
     .end annotation
 
     .prologue
-    .line 799
     .local p0, pattern:Ljava/util/List;,"Ljava/util/List<Lcom/android/internal/widget/LockPatternView$Cell;>;"
     if-nez p0, :cond_0
 
-    .line 800
     const/4 v1, 0x0
 
-    .line 814
     :goto_0
     return-object v1
 
-    .line 803
     :cond_0
     invoke-interface {p0}, Ljava/util/List;->size()I
 
     move-result v5
 
-    .line 804
     .local v5, patternSize:I
     new-array v6, v5, [B
 
-    .line 805
     .local v6, res:[B
     const/4 v2, 0x0
 
@@ -737,14 +731,12 @@
     :goto_1
     if-ge v2, v5, :cond_1
 
-    .line 806
     invoke-interface {p0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v0
 
     check-cast v0, Lcom/android/internal/widget/LockPatternView$Cell;
 
-    .line 807
     .local v0, cell:Lcom/android/internal/widget/LockPatternView$Cell;
     invoke-virtual {v0}, Lcom/android/internal/widget/LockPatternView$Cell;->getRow()I
 
@@ -3132,28 +3124,22 @@
     .end annotation
 
     .prologue
-    .line 778
     .local p0, pattern:Ljava/util/List;,"Ljava/util/List<Lcom/android/internal/widget/LockPatternView$Cell;>;"
     if-nez p0, :cond_0
 
-    .line 779
     const-string v4, ""
 
-    .line 788
     :goto_0
     return-object v4
 
-    .line 781
     :cond_0
     invoke-interface {p0}, Ljava/util/List;->size()I
 
     move-result v2
 
-    .line 783
     .local v2, patternSize:I
     new-array v3, v2, [B
 
-    .line 784
     .local v3, res:[B
     const/4 v1, 0x0
 
@@ -3161,14 +3147,12 @@
     :goto_1
     if-ge v1, v2, :cond_1
 
-    .line 785
     invoke-interface {p0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v0
 
     check-cast v0, Lcom/android/internal/widget/LockPatternView$Cell;
 
-    .line 786
     .local v0, cell:Lcom/android/internal/widget/LockPatternView$Cell;
     invoke-virtual {v0}, Lcom/android/internal/widget/LockPatternView$Cell;->getRow()I
 
@@ -4030,13 +4014,11 @@
     .end annotation
 
     .prologue
-    .line 514
     .local p1, pattern:Ljava/util/List;,"Ljava/util/List<Lcom/android/internal/widget/LockPatternView$Cell;>;"
     invoke-static {p1}, Lcom/android/internal/widget/LockPatternUtils;->patternToHash(Ljava/util/List;)[B
 
     move-result-object v10
 
-    .line 516
     .local v10, hash:[B
     :try_start_0
     invoke-direct {p0}, Lcom/android/internal/widget/LockPatternUtils;->getLockSettings()Lcom/android/internal/widget/ILockSettings;
@@ -4397,12 +4379,10 @@
     .parameter "size"
 
     .prologue
-    .line 990
     const-string v0, "lock_pattern_size"
 
     invoke-virtual {p0, v0, p1, p2}, Lcom/android/internal/widget/LockPatternUtils;->setLong(Ljava/lang/String;J)V
 
-    .line 991
     return-void
 .end method
 
@@ -4546,18 +4526,15 @@
     .end annotation
 
     .prologue
-    .line 759
     invoke-static {}, Lcom/google/android/collect/Lists;->newArrayList()Ljava/util/ArrayList;
 
     move-result-object v3
 
-    .line 761
     .local v3, result:Ljava/util/List;,"Ljava/util/List<Lcom/android/internal/widget/LockPatternView$Cell;>;"
     invoke-virtual {p0}, Ljava/lang/String;->getBytes()[B
 
     move-result-object v1
 
-    .line 765
     .local v1, bytes:[B
     const/4 v2, 0x0
 

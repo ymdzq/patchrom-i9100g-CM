@@ -1521,27 +1521,20 @@
 
     packed-switch v1, :pswitch_data_1
 
-    .line 778
     const/4 v15, 0x0
 
-    .line 782
     .restart local v15       #title:Ljava/lang/CharSequence;
     :goto_2
-    .line 783
     const v1, 0x1080576
 
     invoke-virtual {v9, v1}, Landroid/app/Notification$Builder;->setSmallIcon(I)Landroid/app/Notification$Builder;
 
-    .line 784
     invoke-virtual {v9, v15}, Landroid/app/Notification$Builder;->setTicker(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
 
-    .line 785
     invoke-virtual {v9, v15}, Landroid/app/Notification$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
 
-    .line 786
     invoke-virtual {v9, v8}, Landroid/app/Notification$Builder;->setContentText(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
 
-    .line 788
     move-object/from16 v0, p1
 
     iget-object v1, v0, Landroid/net/NetworkPolicy;->template:Landroid/net/NetworkTemplate;

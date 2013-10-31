@@ -10,7 +10,6 @@ local-phone-apps = ApplicationsProvider \
                    DSPManager \
                    FaceLock \
                    Galaxy4 \
-                   GalaxyS2Settings \
                    GmsCore \
                    GoogleBackupTransport \
                    GoogleCalendarSyncAdapter \

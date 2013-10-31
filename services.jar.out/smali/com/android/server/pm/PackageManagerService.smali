@@ -1230,6 +1230,7 @@
 
     move-result-object v3
 
+    .line 1045
     move-object/from16 v0, p0
 
     iget v4, v0, Lcom/android/server/pm/PackageManagerService;->mSdkVersion:I

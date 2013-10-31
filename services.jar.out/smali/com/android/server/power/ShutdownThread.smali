@@ -261,15 +261,12 @@
 
     invoke-virtual {v2, v3}, Landroid/view/Window;->setType(I)V
 
-    .line 302
     invoke-static {p0}, Lcom/android/server/power/ShutdownThread$Injector;->createShutDownDialog(Landroid/content/Context;)V
 
-    .line 304
     sget-object v2, Lcom/android/server/power/ShutdownThread;->sInstance:Lcom/android/server/power/ShutdownThread;
 
     iput-object p0, v2, Lcom/android/server/power/ShutdownThread;->mContext:Landroid/content/Context;
 
-    .line 305
     sget-object v3, Lcom/android/server/power/ShutdownThread;->sInstance:Lcom/android/server/power/ShutdownThread;
 
     const-string v2, "power"
@@ -417,7 +414,6 @@
 
     invoke-virtual {v1, v2}, Landroid/app/ProgressDialog;->setTitle(Ljava/lang/CharSequence;)V
 
-    .line 296
     const v2, 0x60c002c
 
     invoke-virtual {p0, v2}, Landroid/content/Context;->getText(I)Ljava/lang/CharSequence;
@@ -982,7 +978,6 @@
 
     sput-object v8, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
 
-    .line 214
     :cond_3
     sget-object v8, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
 
@@ -995,12 +990,10 @@
 
     iput-object v8, v1, Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;->dialog:Landroid/app/Dialog;
 
-    .line 215
     sget-object v8, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
 
     invoke-virtual {v8, v1}, Landroid/app/AlertDialog;->setOnDismissListener(Landroid/content/DialogInterface$OnDismissListener;)V
 
-    .line 216
     sget-object v8, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
 
     invoke-virtual {v8}, Landroid/app/AlertDialog;->getWindow()Landroid/view/Window;

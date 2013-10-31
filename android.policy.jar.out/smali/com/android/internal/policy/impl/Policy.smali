@@ -185,7 +185,6 @@
     .parameter "device"
 
     .prologue
-    .line 72
     new-instance v0, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;
 
     invoke-direct {v0}, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;-><init>()V
