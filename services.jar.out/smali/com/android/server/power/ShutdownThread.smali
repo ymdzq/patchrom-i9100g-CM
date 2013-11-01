@@ -878,7 +878,9 @@
     .line 163
     new-instance v8, Landroid/app/AlertDialog$Builder;
 
-    invoke-direct {v8, p0}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+    const v9, 0x60d003e
+
+    invoke-direct {v8, p0, v9}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;I)V
 
     invoke-virtual {v8, v7}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
 
@@ -944,7 +946,9 @@
     .line 202
     new-instance v8, Landroid/app/AlertDialog$Builder;
 
-    invoke-direct {v8, p0}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+    const v9, 0x60d003e
+
+    invoke-direct {v8, p0, v9}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;I)V
 
     invoke-virtual {v8, v7}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
 

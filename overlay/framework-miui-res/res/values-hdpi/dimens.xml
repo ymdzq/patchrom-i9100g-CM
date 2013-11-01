@@ -6,7 +6,7 @@
     <dimen name="alphabet_indexer_text_size">10sp</dimen>
 
     <dimen name="v5_action_bar_height">40dip</dimen>
-    <dimen name="miui_numeric_keyboard_row_height">75px</dimen>
+    <dimen name="miui_numeric_keyboard_row_height">80px</dimen>
     <dimen name="miui_password_input_area_bg_bottom_offset">500px</dimen>
 
     <!-- Height of Horizontal Progressbar -->
