@@ -570,7 +570,7 @@
     </integer-array>
     <string-array name="config_locationProviderPackageNames">
         <item>com.android.location.fused</item>
-        <item>com.google.android.location</item>
+        <item>com.baidu.map.location</item>
     </string-array>
     <array name="config_twoDigitNumberPattern" />
     <array name="config_telephony_set_audioparameters" />

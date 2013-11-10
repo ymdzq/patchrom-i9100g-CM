@@ -50,13 +50,7 @@ local-pre-zip-misc:
 	cp other/GalaxyS2Settings.apk $(ZIP_DIR)/system/app/GalaxyS2Settings.apk
 	cp other/Gallery2.apk $(ZIP_DIR)/system/app/Gallery2.apk
 	cp other/OriginalSettings.apk $(ZIP_DIR)/system/app/OriginalSettings.apk
-#	@echo Add Cusettings
-#	cp other/Cusettings.apk $(ZIP_DIR)/system/app/Cusettings.apk
-#	@echo Add USB_switcher
-#	cp other/USB_switcher.apk $(ZIP_DIR)/system/app/USB_switcher.apk
-#	cp -rf other/system_etc/* $(ZIP_DIR)/system/etc/
-#	cp -rf other/system_lib/* $(ZIP_DIR)/system/lib/
-	cp $(ZIP_DIR)/system/framework/framework_ext.jar $(ZIP_DIR)/system/framework/ext.jar
+	cp $(TMP_DIR)/framework_ext.jar $(ZIP_DIR)/system/framework/mms-common.jar
 	rm -rf $(ZIP_DIR)/system/framework/framework_ext.jar
 	cp other/Generic.kl $(ZIP_DIR)/system/usr/keylayout/
 	cp other/spn-conf.xml $(ZIP_DIR)/system/etc/spn-conf.xml
