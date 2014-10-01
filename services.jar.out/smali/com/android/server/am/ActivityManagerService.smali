@@ -16161,6 +16161,8 @@
     .end local v16           #ba:Landroid/util/SparseArray;,"Landroid/util/SparseArray<Ljava/lang/Long;>;"
     .end local v17           #badApps:Ljava/util/Iterator;,"Ljava/util/Iterator<Landroid/util/SparseArray<Ljava/lang/Long;>;>;"
     :cond_9
+    invoke-direct/range {p0 .. p1}, Lcom/android/server/am/ActivityManagerService;->killNativePackageProcesses(Ljava/lang/String;)V
+
     const/16 v8, -0x64
 
     const/4 v10, 0x1
@@ -20145,6 +20147,52 @@
 
     .line 12690
     const/4 v3, 0x0
+
+    goto :goto_0
+.end method
+
+.method private final killNativePackageProcesses(Ljava/lang/String;)V
+    .locals 3
+    .parameter "packageName"
+
+    .prologue
+    :try_start_0
+    iget-object v1, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    const-string v2, "security"
+
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lmiui/security/SecurityManager;
+
+    .local v0, sm:Lmiui/security/SecurityManager;
+    if-eqz v0, :cond_0
+
+    if-eqz p1, :cond_0
+
+    invoke-static {}, Landroid/app/AppGlobals;->getPackageManager()Landroid/content/pm/IPackageManager;
+
+    move-result-object v1
+
+    const/4 v2, 0x0
+
+    invoke-interface {v1, p1, v2}, Landroid/content/pm/IPackageManager;->getPackageUid(Ljava/lang/String;I)I
+
+    move-result v1
+
+    invoke-virtual {v0, v1, p1}, Lmiui/security/SecurityManager;->killNativePackageProcesses(ILjava/lang/String;)V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .end local v0           #sm:Lmiui/security/SecurityManager;
+    :cond_0
+    :goto_0
+    return-void
+
+    :catch_0
+    move-exception v1
 
     goto :goto_0
 .end method
@@ -65107,19 +65155,11 @@
 
     invoke-direct/range {v2 .. v16}, Lcom/android/server/am/ActivityManagerService;->broadcastIntentLocked(Lcom/android/server/am/ProcessRecord;Ljava/lang/String;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;Ljava/lang/String;ZZIII)I
 
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
-
-    move-object/from16 v0, p0
-
-    iget-object v3, v0, Lcom/android/server/am/ActivityManagerService;->mHandler:Landroid/os/Handler;
-
     move/from16 v0, v19
 
     move-object/from16 v1, v24
 
-    invoke-static {v0, v1, v2, v3}, Landroid/app/MiuiThemeHelper;->handleExtraConfigurationChanges(ILandroid/content/res/Configuration;Landroid/content/Context;Landroid/os/Handler;)V
+    invoke-static {v0, v1}, Landroid/app/MiuiThemeHelper;->handleExtraConfigurationChangesForSystem(ILandroid/content/res/Configuration;)V
 
     and-int/lit8 v2, v19, 0x4
 

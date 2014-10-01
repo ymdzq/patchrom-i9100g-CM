@@ -151,8 +151,6 @@
 
 .field static final TAG:Ljava/lang/String; = "PackageManager"
 
-.field private static final THEME_MAMANER_GUID:I = 0x514
-
 .field static final UPDATED_MEDIA_STATUS:I = 0xc
 
 .field static final UPDATE_PERMISSIONS_ALL:I = 0x1
@@ -955,19 +953,6 @@
 
     iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
 
-    const-string v3, "com.tmobile.thememanager"
-
-    const/16 v4, 0x514
-
-    const/4 v5, 0x1
-
-    invoke-virtual {v2, v3, v4, v5}, Lcom/android/server/pm/Settings;->addSharedUserLPw(Ljava/lang/String;II)Lcom/android/server/pm/SharedUserSetting;
-
-    .line 998
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
-
     const-string v3, "android.uid.nfc"
 
     const/16 v4, 0x403
@@ -976,6 +961,7 @@
 
     invoke-virtual {v2, v3, v4, v5}, Lcom/android/server/pm/Settings;->addSharedUserLPw(Ljava/lang/String;II)Lcom/android/server/pm/SharedUserSetting;
 
+    .line 998
     .line 999
     move-object/from16 v0, p0
 
@@ -2581,7 +2567,7 @@
 
     iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
 
-    invoke-static {v2}, Lcom/android/server/pm/ExtraPackageManagerServices;->performPreinstallApp(Lcom/android/server/pm/Settings;)V
+    invoke-static {v0, v2}, Lcom/android/server/pm/ExtraPackageManagerServices;->performPreinstallApp(Lcom/android/server/pm/PackageManagerService;Lcom/android/server/pm/Settings;)V
 
     move-object/from16 v0, p0
 
@@ -3978,6 +3964,72 @@
     return-void
 .end method
 
+.method private checkInstallerFromXiaomi(I)I
+    .locals 7
+    .parameter "uid"
+
+    .prologue
+    const/4 v4, 0x0
+
+    const-string v2, "com.android.packageinstaller"
+
+    .local v2, INSTALL_FROM_PACKAGEINSTALLER:Ljava/lang/String;
+    const-string v0, "com.xiaomi.gamecenter"
+
+    .local v0, INSTALL_FROM_GAMECENTER:Ljava/lang/String;
+    const-string v1, "com.xiaomi.market"
+
+    .local v1, INSTALL_FROM_MARKET:Ljava/lang/String;
+    invoke-virtual {p0, p1}, Lcom/android/server/pm/PackageManagerService;->getPackagesForUid(I)[Ljava/lang/String;
+
+    move-result-object v3
+
+    .local v3, packages:[Ljava/lang/String;
+    if-eqz v3, :cond_1
+
+    array-length v5, v3
+
+    const/4 v6, 0x1
+
+    if-ne v5, v6, :cond_1
+
+    const-string v5, "com.android.packageinstaller"
+
+    aget-object v6, v3, v4
+
+    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_0
+
+    const-string v5, "com.xiaomi.gamecenter"
+
+    aget-object v6, v3, v4
+
+    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_0
+
+    const-string v5, "com.xiaomi.market"
+
+    aget-object v6, v3, v4
+
+    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_1
+
+    :cond_0
+    const/16 v4, 0x100
+
+    :cond_1
+    return v4
+.end method
+
 .method private checkPermissionTreeLP(Ljava/lang/String;)Lcom/android/server/pm/BasePermission;
     .locals 4
     .parameter "permName"
@@ -4362,19 +4414,21 @@
     goto :goto_0
 
     :cond_4
-    iget-object v6, p0, Lcom/android/server/pm/PackageManagerService;->mResolveInfo:Landroid/content/pm/ResolveInfo;
+    iget-object v7, p0, Lcom/android/server/pm/PackageManagerService;->mResolveInfo:Landroid/content/pm/ResolveInfo;
 
     move-object v1, p0
 
-    move-object v2, p1
+    move-object/from16 v2, p4
 
-    move-object v3, p2
+    move-object v3, p1
 
-    move v4, p3
+    move-object v4, p2
 
-    move/from16 v5, p5
+    move v5, p3
 
-    invoke-static/range {v1 .. v6}, Lcom/android/server/pm/PackageManagerService$Injector;->checkMiuiIntent(Lcom/android/server/pm/PackageManagerService;Landroid/content/Intent;Ljava/lang/String;IILandroid/content/pm/ResolveInfo;)Landroid/content/pm/ResolveInfo;
+    move/from16 v6, p5
+
+    invoke-static/range {v1 .. v7}, Lcom/android/server/pm/PackageManagerService$Injector;->checkMiuiIntent(Lcom/android/server/pm/PackageManagerService;Ljava/util/List;Landroid/content/Intent;Ljava/lang/String;IILandroid/content/pm/ResolveInfo;)Landroid/content/pm/ResolveInfo;
 
     move-result-object v1
 
@@ -6923,6 +6977,8 @@
     invoke-static {v2, v3}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :cond_0
 
     .line 8259
     const/4 v2, -0x2
@@ -33189,6 +33245,12 @@
 
     .local v9, user:Landroid/os/UserHandle;
     :goto_0
+    invoke-direct {p0, v11}, Lcom/android/server/pm/PackageManagerService;->checkInstallerFromXiaomi(I)I
+
+    move-result v1
+
+    or-int/2addr p3, v1
+
     const/16 v1, 0x7d0
 
     if-eq v11, v1, :cond_0
@@ -38754,4 +38816,130 @@
 
     .line 9274
     return-void
+.end method
+
+.method deleteDataPackage(Ljava/lang/String;Z)Z
+    .locals 10
+    .parameter "packageName"
+    .parameter "keepData"
+
+    .prologue
+    const/4 v0, 0x1
+
+    const/4 v8, 0x0
+
+    invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    :cond_0
+    :goto_0
+    return v8
+
+    :cond_1
+    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Ljava/util/HashMap;
+
+    monitor-enter v1
+
+    :try_start_0
+    iget-object v2, p0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+
+    iget-object v2, v2, Lcom/android/server/pm/Settings;->mPackages:Ljava/util/HashMap;
+
+    invoke-virtual {v2, p1}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v7
+
+    check-cast v7, Lcom/android/server/pm/PackageSetting;
+
+    .local v7, ps:Lcom/android/server/pm/PackageSetting;
+    if-nez v7, :cond_2
+
+    monitor-exit v1
+
+    goto :goto_0
+
+    .end local v7           #ps:Lcom/android/server/pm/PackageSetting;
+    :catchall_0
+    move-exception v0
+
+    monitor-exit v1
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    throw v0
+
+    .restart local v7       #ps:Lcom/android/server/pm/PackageSetting;
+    :cond_2
+    :try_start_1
+    monitor-exit v1
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    invoke-static {v7}, Lcom/android/server/pm/PackageManagerService;->isSystemApp(Lcom/android/server/pm/PackageSetting;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    new-instance v5, Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;
+
+    invoke-direct {v5}, Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;-><init>()V
+
+    .local v5, info:Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;
+    iget-object v9, p0, Lcom/android/server/pm/PackageManagerService;->mInstallLock:Ljava/lang/Object;
+
+    monitor-enter v9
+
+    const/4 v2, 0x0
+
+    const/4 v3, 0x1
+
+    const/high16 v1, 0x1
+
+    if-eqz p2, :cond_3
+
+    move v8, v0
+
+    :cond_3
+    or-int v4, v1, v8
+
+    const/4 v6, 0x1
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    :try_start_2
+    invoke-direct/range {v0 .. v6}, Lcom/android/server/pm/PackageManagerService;->deletePackageLI(Ljava/lang/String;Landroid/os/UserHandle;ZILcom/android/server/pm/PackageManagerService$PackageRemovedInfo;Z)Z
+
+    move-result v8
+
+    .local v8, ret:Z
+    iget-object v0, v5, Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;->args:Lcom/android/server/pm/PackageManagerService$InstallArgs;
+
+    if-eqz v0, :cond_4
+
+    iget-object v0, v5, Lcom/android/server/pm/PackageManagerService$PackageRemovedInfo;->args:Lcom/android/server/pm/PackageManagerService$InstallArgs;
+
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Lcom/android/server/pm/PackageManagerService$InstallArgs;->doPostDeleteLI(Z)Z
+
+    :cond_4
+    monitor-exit v9
+
+    goto :goto_0
+
+    .end local v8           #ret:Z
+    :catchall_1
+    move-exception v0
+
+    monitor-exit v9
+    :try_end_2
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+
+    throw v0
 .end method

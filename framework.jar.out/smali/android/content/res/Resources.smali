@@ -529,58 +529,35 @@
     .prologue
     .line 1529
     .local p1, cache:Landroid/util/LongSparseArray;,"Landroid/util/LongSparseArray<Ljava/lang/ref/WeakReference<Landroid/graphics/drawable/Drawable$ConstantState;>;>;"
-    const/4 v4, 0x0
-
-    invoke-static {p2, v4}, Landroid/content/res/Configuration;->needNewResources(II)Z
-
-    move-result v4
-
-    if-eqz v4, :cond_1
-
-    .line 1534
-    invoke-virtual {p1}, Landroid/util/LongSparseArray;->clear()V
-
-    .line 1566
-    :cond_0
-    return-void
-
-    .line 1537
-    :cond_1
     invoke-virtual {p1}, Landroid/util/LongSparseArray;->size()I
 
     move-result v0
 
-    .line 1542
     .local v0, N:I
     const/4 v2, 0x0
 
     .local v2, i:I
     :goto_0
-    if-ge v2, v0, :cond_0
+    if-ge v2, v0, :cond_1
 
-    .line 1543
     invoke-virtual {p1, v2}, Landroid/util/LongSparseArray;->valueAt(I)Ljava/lang/Object;
 
     move-result-object v3
 
     check-cast v3, Ljava/lang/ref/WeakReference;
 
-    .line 1544
     .local v3, ref:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/graphics/drawable/Drawable$ConstantState;>;"
-    if-eqz v3, :cond_2
+    if-eqz v3, :cond_0
 
-    .line 1545
     invoke-virtual {v3}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
 
     move-result-object v1
 
     check-cast v1, Landroid/graphics/drawable/Drawable$ConstantState;
 
-    .line 1546
     .local v1, cs:Landroid/graphics/drawable/Drawable$ConstantState;
-    if-eqz v1, :cond_2
+    if-eqz v1, :cond_0
 
-    .line 1547
     invoke-virtual {v1}, Landroid/graphics/drawable/Drawable$ConstantState;->getChangingConfigurations()I
 
     move-result v4
@@ -589,7 +566,7 @@
 
     move-result v4
 
-    if-eqz v4, :cond_2
+    if-eqz v4, :cond_0
 
     .line 1555
     const/4 v4, 0x0
@@ -598,10 +575,14 @@
 
     .line 1542
     .end local v1           #cs:Landroid/graphics/drawable/Drawable$ConstantState;
-    :cond_2
+    :cond_0
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
+
+    .end local v3           #ref:Ljava/lang/ref/WeakReference;,"Ljava/lang/ref/WeakReference<Landroid/graphics/drawable/Drawable$ConstantState;>;"
+    :cond_1
+    return-void
 .end method
 
 .method static clearPreloadedCache()V
@@ -929,7 +910,7 @@
 .end method
 
 .method public static getSystem()Landroid/content/res/Resources;
-    .locals 3
+    .locals 5
 
     .prologue
     sget-object v2, Landroid/content/res/Resources;->mSync:Ljava/lang/Object;
@@ -949,6 +930,14 @@
 
     .restart local v0       #ret:Landroid/content/res/Resources;
     sput-object v0, Landroid/content/res/Resources;->mSystem:Landroid/content/res/Resources;
+
+    move-object v1, v0
+
+    check-cast v1, Landroid/content/res/MiuiResources;
+
+    const/4 v4, 0x0
+
+    invoke-virtual {v1, v4}, Landroid/content/res/MiuiResources;->init(Ljava/lang/String;)V
 
     :cond_0
     monitor-exit v2
@@ -5779,6 +5768,10 @@
 
     invoke-virtual {v2, v3}, Landroid/content/res/Configuration;->updateFrom(Landroid/content/res/Configuration;)I
 
+    move-result v20
+
+    invoke-static/range {v20 .. v20}, Landroid/content/pm/ActivityInfo;->activityInfoConfigToNative(I)I
+
     move-result v2
 
     const/high16 v3, -0x8000
@@ -5787,27 +5780,8 @@
 
     or-int v20, v2, v3
 
-    .line 1453
-    const v2, 0x8000
-
-    and-int v2, v2, v20
-
-    if-eqz v2, :cond_c
-
-    .line 1454
-    invoke-static/range {v20 .. v20}, Landroid/content/pm/ActivityInfo;->activityInfoConfigToNative(I)I
-
-    move-result v20
-
-    .line 1455
-    const v2, 0x8000
-
-    or-int v20, v20, v2
-
-    .line 1460
     .end local v21           #density:I
     :cond_6
-    :goto_0
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/content/res/Resources;->mConfiguration:Landroid/content/res/Configuration;
@@ -5988,7 +5962,7 @@
 
     iget v3, v3, Landroid/util/DisplayMetrics;->heightPixels:I
 
-    if-lt v2, v3, :cond_d
+    if-lt v2, v3, :cond_c
 
     .line 1479
     move-object/from16 v0, p0
@@ -6007,7 +5981,7 @@
 
     .line 1487
     .local v13, height:I
-    :goto_1
+    :goto_0
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/content/res/Resources;->mConfiguration:Landroid/content/res/Configuration;
@@ -6196,33 +6170,18 @@
 
     iput-object v2, v0, Landroid/content/res/Resources;->mPluralRule:Llibcore/icu/NativePluralRules;
 
-    .line 1519
     :cond_b
     monitor-exit v3
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
-    .line 1520
     return-void
 
-    .line 1457
-    .end local v5           #locale:Ljava/lang/String;
     .end local v10           #keyboardHidden:I
     .end local v12           #width:I
     .end local v13           #height:I
-    .restart local v21       #density:I
     :cond_c
     :try_start_2
-    invoke-static/range {v20 .. v20}, Landroid/content/pm/ActivityInfo;->activityInfoConfigToNative(I)I
-
-    move-result v20
-
-    goto/16 :goto_0
-
-    .line 1483
-    .end local v21           #density:I
-    .restart local v5       #locale:Ljava/lang/String;
-    :cond_d
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/content/res/Resources;->mMetrics:Landroid/util/DisplayMetrics;
@@ -6238,7 +6197,7 @@
     iget v13, v2, Landroid/util/DisplayMetrics;->widthPixels:I
 
     .restart local v13       #height:I
-    goto/16 :goto_1
+    goto/16 :goto_0
 
     .line 1514
     .end local v5           #locale:Ljava/lang/String;

@@ -23,7 +23,7 @@ then
             rm -rf "$file3"
     done
 
-	rm -rf "$BUILD_OUT/framework/smali/com/google/android/mms"
+	#rm -rf "$BUILD_OUT/framework/smali/com/google/android/mms"
 
     # move some smali to create a separate $SEP_FRAME.jar
     # including: smali/miui smali/android/widget
@@ -57,7 +57,7 @@ then
             rm -rf "$file"
     done
 
-	cp -rf "$BUILD_OUT/framework_miui/smali/com/google/android/mms" "$BUILD_OUT/framework_ext/smali/com/google/android"
+	#cp -rf "$BUILD_OUT/framework_miui/smali/com/google/android/mms" "$BUILD_OUT/framework_ext/smali/com/google/android"
 	mv "$BUILD_OUT/$SEP_FRAME/smali/android/widget/"  "$BUILD_OUT/framework_ext/smali/android/widget"
 	#mv "$BUILD_OUT/$SEP_FRAME/smali/miui/"  "$BUILD_OUT/framework_ext/smali/miui"
 	rm -rf $BUILD_OUT/$SEP_FRAME

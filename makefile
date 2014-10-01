@@ -42,7 +42,6 @@ include $(PORT_BUILD)/porting.mk
 
 # To define any local-target
 updater := $(ZIP_DIR)/META-INF/com/google/android/updater-script
-pre_install_data_packages := $(TMP_DIR)/pre_install_apk_pkgname.txt
 local-pre-zip-misc:
 	@echo Update boot image
 	cp other/boot.img $(ZIP_DIR)/boot.img
@@ -50,33 +49,33 @@ local-pre-zip-misc:
 	cp other/GalaxyS2Settings.apk $(ZIP_DIR)/system/app/GalaxyS2Settings.apk
 	cp other/Gallery2.apk $(ZIP_DIR)/system/app/Gallery2.apk
 	cp other/OriginalSettings.apk $(ZIP_DIR)/system/app/OriginalSettings.apk
+	@echo Move framework_ext to mms-common
 	cp $(TMP_DIR)/framework_ext.jar $(ZIP_DIR)/system/framework/mms-common.jar
 	rm -rf $(ZIP_DIR)/system/framework/framework_ext.jar
+	@echo Enable VOLUME KEY WAKE
 	cp other/Generic.kl $(ZIP_DIR)/system/usr/keylayout/
+	@echo Add Miui files
 	cp other/spn-conf.xml $(ZIP_DIR)/system/etc/spn-conf.xml
 	cp other/build.prop $(ZIP_DIR)/system/build.prop
 	cp other/system_fonts.xml $(ZIP_DIR)/system/etc/system_fonts.xml
-	rm -rf $(pre_install_data_packages)
-	for apk in $(ZIP_DIR)/data/media/preinstall_apps/*.apk; do\
-		$(AAPT) d --values resources $$apk | grep 'id=127 packageCount' | sed -e "s/^.*name=//" >> $(pre_install_data_packages);\
-	done
-	more $(pre_install_data_packages) | wc -l > $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
-	more $(pre_install_data_packages) >> $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
+#	rm -f $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
+#	for apk in $(ZIP_DIR)/data/miui/preinstall_apps/*.apk; do \
+#		$(AAPT) d --values resources $$apk | grep 'id=127 packageCount' | sed -e "s/^.*name=//" >> $(ZIP_DIR)/system/etc/enforcecopyinglibpackages_tmp.txt; \
+#	done
+#	for apk in $(ZIP_DIR)/data/miui/cust/preinstall_apps/*.apk; do \
+#		$(AAPT) d --values resources $$apk | grep 'id=127 packageCount' | sed -e "s/^.*name=//" >> $(ZIP_DIR)/system/etc/enforcecopyinglibpackages_tmp.txt; \
+#	done
+#	cat $(ZIP_DIR)/system/etc/enforcecopyinglibpackages_tmp.txt | wc -l > $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
+#	cat $(ZIP_DIR)/system/etc/enforcecopyinglibpackages_tmp.txt >> $(ZIP_DIR)/system/etc/enforcecopyinglibpackages.txt
+#	rm -f $(ZIP_DIR)/system/etc/enforcecopyinglibpackages_tmp.txt
 
 out/framework2.jar : out/framework.jar
-
-%.phone : out/%.jar
-	@echo push -- to --- phone
-	adb remount
-	adb push $< /system/framework
-	adb shell chmod 644 /system/framework/$*.jar
-	#adb shell stop
-	#adb shell start
-	#adb reboot
 
 %.sign-plat : out/%
 	java -jar $(TOOL_DIR)/signapk.jar $(PORT_ROOT)/build/security/platform.x509.pem $(PORT_ROOT)/build/security/platform.pk8  $< $<.signed
 	@echo push -- to --- phone
 	adb remount
-	adb push $<.signed /system/app/$*
-	adb shell chmod 644 /system/app/$*
+	adb push $<.signed /data/local/tmp/$*
+	adb shell chmod 644 /data/local/tmp/$*
+	adb shell busybox mv -f /data/local/tmp/$* /system/app
+

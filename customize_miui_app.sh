@@ -65,6 +65,8 @@ if [ $1 = "MiuiHome" ];then
 	echo "Fatal error: MiuiHome patch fail"
         exit 1
     done
+
+    $XMLMERGYTOOL $1/res/values $2/res/values
 fi
 
 if [ $1 = "MiuiSystemUI" ];then
